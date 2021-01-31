@@ -1,0 +1,123 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>profile | Image Uploader</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+<!-- JavaScript Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js" integrity="sha384-q2kxQ16AaE6UbzuKqyBE9/u/KzioAlnx2maXQHiDX9d4/zp8Ok3f+M7DPm+Ib6IU" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.min.js" integrity="sha384-pQQkAEnwaBkjpqZ8RU1fF1AKtTcHJwFl3pblpTlHXybJjHpMYo79HY3hIi4NKxyj" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="{% static 'style.css' %}">
+
+<style>
+        .profile img{
+                border-radius:50%;
+               
+        }
+
+        img:hover {
+          cursor: pointer;
+        }
+</style>
+</head>
+<body>
+        <header class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 ">
+                <p class="h5 my-0 me-md-auto fw-normal"><a href="/" class="text-white">Image Uploader</a></p>
+                <nav class="my-2 my-md-0 me-md-3">
+                        {% if user.is_authenticated%}
+                        <a href="/profile/"><img src="{{user.profile.image.url}}" style="width: 30px;border-radius: 50%;" alt=""></a>
+                        <a class="p-2" href="/logout/">Logout</a>
+                        {%else%}
+                        <a class="p-2" href="/signup/">Signup</a>
+                        <a class="p-2" href="/login/">Login</a>
+                        {%endif%}
+                  
+                </nav>
+              </header>
+
+
+
+        
+              
+      <div class="profile container bg-light shadow mb-5 py-5">
+
+              <h1 class="font text-center color">Profile</h1> 
+<hr> <br>
+             <div class="row">
+                     <div class="col-sm-6 text-center">
+                        <img src="{{users.profile.image.url}}">
+                     </div>
+
+                     <div class="col-sm-6">
+                             <h3>@{{users.username}}</h3><br>
+                             <h5>{{users.email}}</h5> 
+
+                             <h5>{{users.first_name}} {{users.last_name}}</h5>
+
+                     </div>
+             </div>
+
+      </div>  
+
+
+      <div class="container font mt-5">
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <li class="nav-item">
+                  <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Photos</a>
+                </li>
+              </ul>
+              <div class="tab-content" id="myTabContent">
+                <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+
+<div class="row mt-2">
+        {% for images in image %}
+<div class="col-sm-4 mt-3">
+        <a title="{{images.image_name}}" data-bs-toggle="modal" data-bs-target="#image-id{{images.id}}" data-bs-whatever="@mdo">  
+        <img src="{{images.image.url}}" class="img-fluid img shadow-lg" alt="...">
+          </a>
+</div>
+
+              
+        <!-- ================== Full screen Image ===================== -->
+
+        <div class="modal fade" id="image-id{{images.id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-xl">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">
+                        <img src="{{images.user_profile}}" style="width: 40px;border-radius:50%;" alt="">   
+                        <small class="font ">{{images.user}}</small>
+                        <a href="{{images.image.url}}" download class="btn btn-sm text-center btn-outline-info font ">Download <i class="fa fa-arrow-down" aria-hidden="true"></i></a>
+                      </h5>
+                      
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                            
+                        <img src="{{images.image.url}}" class="img-fluid shadow-lg" alt="...">
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary font btn-sm" data-bs-dismiss="modal">Close</button>
+                      <button type="button" class="btn btn-primary font btn-sm">Share <i class="fa fa-share"></i></button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- ====================== END =========================   -->
+
+
+        {%endfor%}
+</div>
+
+
+                </div>
+                
+              </div>
+      </div>
+      
+</body>
+</html>

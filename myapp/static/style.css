@@ -1,0 +1,40 @@
+@import url('https://fonts.googleapis.com/css2?family=Baloo+Bhai+2:wght@600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+
+ul li {
+        list-style: none;
+}
+
+.font{
+        font-family: 'Baloo Bhai 2', cursive;
+}
+.color{
+        color:#10294c;
+}
+.font2{
+        font-family: 'Poppins', sans-serif;
+}
+.bg-color{
+        background-color: #10294c;
+}
+header{
+        background:#10294c;
+        color:white;
+        font-family: 'Baloo Bhai 2', cursive;
+}
+header nav a{
+        font-family: 'Baloo Bhai 2', cursive;
+        color:white;
+}
+
+.image .img:hover{
+               opacity:0.9;
+               transition: 0.7s ease-in-out;
+               cursor:pointer;
+               
+
+       }
+       a{
+               text-decoration:none;
+       }
